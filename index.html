@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app{
+            background-color: gray;
+            align-items: center;
+        }
+        .div1{
+            /* display: grid;
+            grid-template-columns: 3;
+            background-color: blue; */
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            margin: 20px;
+            padding: 10px;
+  
+        }
+        #spiller1{
+            background-color: green;
+            text-align: center;
+            /* margin-right: 10%; */
+            /* display: grid; */
+            /* align-items: center;
+            margin: 1%; */
+        }
+        #spiller2{
+            background-color: brown;
+            text-align: center;
+            /* margin-left: 10%; */
+            /* align-items: center;
+            margin: 1%; */
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- <input type="text" onchange=""> -->
+    <script>
+        // R=ruter H=hjerter K=kløver S=spar
+        let kortbunke = ['Ruter1','Ruter2','Ruter3','Ruter4','Ruter5','Ruter6',
+        'Ruter7','Ruter8','Ruter9','Ruter10','Ruter11','Ruter12','Ruter13','Hjerter1',
+        'Hjerter2','Hjerter3','Hjerter4','Hjerter5','Hjerter6','Hjerter7','Hjerter8',
+        'Hjerter9','Hjerter10','Hjerter11','Hjerter12','Hjerter13','Kløver1','Kløver2',
+        'Kløver3','Kløver4','Kløver5','Kløver6','Kløver7','Kløver8','Kløver9','Kløver10',
+        'Kløver11','Kløver12','Kløver13','Spar1','Spar2','Spar3','Spar4','Spar5','Spar6',
+        'Spar7','Spar8','Spar9','Spar10','Spar11','Spar12','Spar13'];
+        let kortutdelt = [];
+        let kortute = [];
+        let tilfeldigtall = '';
+        let checkcards = 52;
+        let test ='';
+        
+        
+        
+        updateView()
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="div1" id="bord">
+                <button onclick="trekkKort()">trekk kort</button>
+                <button onclick="slettkort(2)">slett test</button>
+                <div onclick="leggUtKort()">${kortutdelt}</div>
+            </div>
+            <div class="div1" id="spiller1">
+                <input type="text" onchange="leggUtKort(this.value)">
+                <div id="cards">${kortute}</div>
+            
+            
+            
+            
+            </div>
+            <div class="div1" id="spiller2">
+                <div id="cards">${kortute}</div>
+                
+                
+                
+                
+            </div>
+            `;
+            // console.log(kortutdelt1)
+            // document.getElementById('cards').innerHTML = test;
+        }
+        // function viewTest(){
+        //     document.getElementById('app').innerHTML +=
+        // }
+
+
+
+        function trekkKort(){
+            tilfeldigtall = Math.floor(Math.random() *checkcards);
+            // if(kortutdelt1 <0)
+                kortutdelt.push(kortbunke[tilfeldigtall]);
+                slettkort(tilfeldigtall);
+                checkcards -= 1;
+                console.log(tilfeldigtall);
+                console.log(kortutdelt);
+                updateView();
+        }
+        function slettkort(kortbunkenummer){
+            test = kortbunke.splice(kortbunkenummer,1);
+        }
+        function leggUtKort(number){
+            kortute.push(kortutdelt[number]);
+            updateView();
+        }
+    </script>
+</body>
+</html>
